@@ -23,6 +23,8 @@
 		BBD488C51EF1FFD300B1CC3A /* nave1.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD488C41EF1FFD300B1CC3A /* nave1.png */; };
 		BBD488CB1EF2017600B1CC3A /* nave2.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD488CA1EF2017600B1CC3A /* nave2.png */; };
 		BBD488CD1EF203E200B1CC3A /* xenonost.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BBD488CC1EF203E200B1CC3A /* xenonost.mp3 */; };
+		BBED6D321EF60F1100C6BA06 /* maloDead.png in Resources */ = {isa = PBXBuildFile; fileRef = BBED6D301EF60F1100C6BA06 /* maloDead.png */; };
+		BBED6D331EF60F1100C6BA06 /* naveDead.png in Resources */ = {isa = PBXBuildFile; fileRef = BBED6D311EF60F1100C6BA06 /* naveDead.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		BBD488C41EF1FFD300B1CC3A /* nave1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nave1.png; sourceTree = "<group>"; };
 		BBD488CA1EF2017600B1CC3A /* nave2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nave2.png; sourceTree = "<group>"; };
 		BBD488CC1EF203E200B1CC3A /* xenonost.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xenonost.mp3; sourceTree = "<group>"; };
+		BBED6D301EF60F1100C6BA06 /* maloDead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = maloDead.png; sourceTree = "<group>"; };
+		BBED6D311EF60F1100C6BA06 /* naveDead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = naveDead.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 		81998B451AE3E01A0045419C /* img */ = {
 			isa = PBXGroup;
 			children = (
+				BBED6D301EF60F1100C6BA06 /* maloDead.png */,
+				BBED6D311EF60F1100C6BA06 /* naveDead.png */,
 				BB90DAC41EF3381D001E79ED /* malo.png */,
 				BB08B6961EF2EC1900AA1EC1 /* naveleft.png */,
 				BB08B6971EF2EC1900AA1EC1 /* naveright.png */,
@@ -206,6 +212,8 @@
 				BB08B6991EF2EC1900AA1EC1 /* naveright.png in Resources */,
 				BBD488C51EF1FFD300B1CC3A /* nave1.png in Resources */,
 				BBD488CD1EF203E200B1CC3A /* xenonost.mp3 in Resources */,
+				BBED6D331EF60F1100C6BA06 /* naveDead.png in Resources */,
+				BBED6D321EF60F1100C6BA06 /* maloDead.png in Resources */,
 				81998B2B1AE3DCA40045419C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

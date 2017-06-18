@@ -15,7 +15,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Recursos
     var bg = SKSpriteNode()
     var movingObjects = SKNode()
-
     // Variables
     var gameOver = false
     var timer = Timer()
@@ -33,6 +32,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self;
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -5.0)
+        
+        if #available(iOS 9, *) {
+            var backgroundMusic: SKAudioNode
+            
+            if let musicURL = Bundle.main.url(forResource: "xenonost", withExtension: "mp3") {
+                backgroundMusic = SKAudioNode(url: musicURL)
+                addChild(backgroundMusic)
+            }
+        }
+        
+
         
         // SCORE LABEL CONFIG
         
@@ -52,8 +62,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let naveTexture = SKTexture(imageNamed: "nave1.png")
         let naveTexture2 = SKTexture(imageNamed: "nave2.png")
-        //let naveTexture3 = SKTexture(imageNamed: "naveleft.png")
-        //let naveTexture4 = SKTexture(imageNamed: "naveright.png")
         
         // ANIMACIÓN NAVE FUEGO TRASERO
         let animation = SKAction.animate(with: [naveTexture, naveTexture2], timePerFrame: 0.1)
@@ -81,6 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let ground = SKNode()
         ground.position = CGPoint(x: 0, y: 0)
         ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.frame.size.width * 2, height: 1))
+        ground.name = "suelo"
         ground.physicsBody?.isDynamic = false
         ground.physicsBody?.categoryBitMask = objectGroup
         ground.physicsBody?.collisionBitMask = objectGroup
@@ -126,6 +135,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let pipeOffset = CGFloat(movementAmount) - self.frame.size.width / 4
         
         let malo1Texture = SKTexture(imageNamed: "malo.png")
+
         let malo1 = SKSpriteNode(texture: malo1Texture)
         let mueveMalos = SKAction.moveBy(x:0, y: -(self.frame.size.height) + (malo1Texture.size().height * 2), duration: TimeInterval(self.frame.size.height / 100))
         //let removeMalos = SKAction.removeFromParent()
@@ -179,7 +189,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let secondNode = contact.bodyB.node as! SKSpriteNode
         print("BODY A\(contact.bodyA.node)")
         print("BODY B\(contact.bodyB.node)")
-
+        
         if (contact.bodyA.node!.name != "naveNode") &&
             (contact.bodyB.node!.name != "malo") {
             score += 1
@@ -189,6 +199,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.gameOver = true
             self.movingObjects.speed = 0
             timer.invalidate()
+            let naveTextureDead = SKTexture(imageNamed: "naveDead.png")
+            let maloTextureDead = SKTexture(imageNamed: "maloDead.png")
+
+            let animation = SKAction.animate(with: [naveTextureDead, maloTextureDead], timePerFrame: 0.3)
+            let explosion = SKAction.repeatForever(animation)
+            nave.run(explosion)
+
+            self.nave.texture = naveTextureDead
             
             self.gameOverLabel.fontName = "Helvetica"
             self.gameOverLabel.fontSize = 30
@@ -213,6 +231,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.gameOverLabel.removeFromParent()
             self.movingObjects.speed = 1
             
+            let naveTexture = SKTexture(imageNamed: "nave1.png")
+            let naveTexture2 = SKTexture(imageNamed: "nave2.png")
+
+            nave.texture = naveTexture
+
+            let animation = SKAction.animate(with: [naveTexture, naveTexture2], timePerFrame: 0.1)
+            let naveImpulso = SKAction.repeatForever(animation)
+            nave.run(naveImpulso)
+            
             gameOver = false
         }
     }
@@ -229,12 +256,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     nave.physicsBody?.applyImpulse(CGVector(dx:-10, dy: 0))
                     nave.physicsBody?.linearDamping = 1
                     nave.physicsBody?.mass = 1
+                    
                 } else {
                     nave.physicsBody?.applyImpulse(CGVector(dx: 10, dy: 0))
                     nave.physicsBody?.linearDamping = 1
                     nave.physicsBody?.mass = 1
                 }
-                
+            
                 if(pointOfTouch.y < middleScreenHeight){
                     nave.physicsBody?.applyImpulse(CGVector(dx:0, dy: -10))
                     nave.physicsBody?.linearDamping = 1
